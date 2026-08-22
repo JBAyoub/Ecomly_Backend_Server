@@ -11,18 +11,15 @@ const app = express();
 
 
 app.use(bodyParser.json())
-app.use(morgan);
+app.use(morgan("dev"));
 app.use(cors());
 app.options('/', cors());
-
+const authRouter = require("./routes/auth");
+const productRouter = require("./routes/product");
+app.use(authRouter);
+app.use("/products",productRouter);
 app.listen(env.PORT,env.HOSTNAME,() => {
      console.log(`Server ru at http://${env.HOSTNAME}:${env.PORT}`);
-})
-app.get("/useryou/yoyo/:id", (req ,res) => {
-     return res.json(`there ya go ya little user ${req.params.id}` );
-})
-app.get("/", (req ,res) => {
-     return res.send( "<h1>NIGGERS</h1>");
 })
 
 mongoose.connect(env.MONGODB_CONNECTION_STRING).then(() => {
