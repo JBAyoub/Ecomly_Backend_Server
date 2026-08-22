@@ -17,7 +17,7 @@ app.options('/', cors());
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 app.use(authRouter);
-app.use("/products",productRouter);
+app.use("/products", productRouter);
 app.listen(env.PORT,env.HOSTNAME,() => {
      console.log(`Server ru at http://${env.HOSTNAME}:${env.PORT}`);
 })

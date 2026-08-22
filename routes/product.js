@@ -1,10 +1,10 @@
 const productRouter = require("express").Router();
+const productsControllers= require('../controllers/products');
 productRouter.get("/count", (req,res) => {
-     const count = 256;
-     return res.status(200).send(`the count is ${count}`);
-})
+     productsControllers.productsCountController(req,res);
+});
 productRouter.get("/:id", (req,res) => {
-     return res.status(200).send(`the user has requested the product with the id  ${req.params.id}`);
+     productsControllers.productDetailController(req,res);
 })
 productRouter.delete("/:id", (req,res) => {
      return res.status(200).send(`the user has requested to delte the product with the id  ${req.params.id}`);
