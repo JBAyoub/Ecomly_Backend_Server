@@ -1,0 +1,25 @@
+{
+  "name": "ecomly_backend_server",
+  "version": "1.0.0",
+  "description": "what description",
+  "homepage": "https://github.com/JBAyoub/Ecomly-Backend-Server#readme",
+  "bugs": {
+    "url": "https://github.com/JBAyoub/Ecomly-Backend-Server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/JBAyoub/Ecomly-Backend-Server.git"
+  },
+  "license": "ISC",
+  "author": "Ayb",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}
