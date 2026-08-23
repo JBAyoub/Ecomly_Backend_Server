@@ -13,14 +13,12 @@ exports.register = async function (req,res)  {
           const errorMessages = errors.array().map((error) => ({
                field: error.path,
                message: error.msg
-          }));
-         
+          }));  
           res.status(400).json({
                errors: errorMessages
           });
      }
 try {
-     console.log(req.body.password);
      let user = new User({
           ...req.body,
           passwordHash: bcrypt.hashSync(req.body.password,8)

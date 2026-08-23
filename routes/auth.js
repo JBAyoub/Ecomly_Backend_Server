@@ -1,6 +1,7 @@
 const authRouter = require('express').Router();
 const authController = require('../controllers/auth_controller');
 const {body} = require('express-validator');
+
 const validateUser = [
      body('name').notEmpty().withMessage('Name is required'),
      body('email').isEmail().withMessage('Please enter a valid email'),
