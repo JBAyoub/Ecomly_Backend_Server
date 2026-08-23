@@ -1,6 +1,6 @@
 const {validationResult} = require('express-validator');
 const { User } = require('../models/user');
-const { default: bcrypt } = require('bcryptjs');
+const  bcrypt  = require('bcryptjs');
 
 
 exports.login = async function (req,res)  {
@@ -20,6 +20,7 @@ exports.register = async function (req,res)  {
           });
      }
 try {
+     console.log(req.body.password);
      let user = new User({
           ...req.body,
           passwordHash: bcrypt.hashSync(req.body.password,8)
