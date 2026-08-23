@@ -7,6 +7,7 @@ const mongoose= require ("mongoose");
 require('dotenv/config');
 const env = process.env;
 const app = express();
+const api = env.API_URL;
 
 
 
@@ -16,8 +17,8 @@ app.use(cors());
 app.options('/', cors());
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
-app.use(authRouter);
-app.use("/products", productRouter);
+app.use(`${api}`,authRouter);
+app.use(`${api}/products`, productRouter);
 app.listen(env.PORT,env.HOSTNAME,() => {
      console.log(`Server ru at http://${env.HOSTNAME}:${env.PORT}`);
 })
