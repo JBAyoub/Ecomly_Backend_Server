@@ -1,15 +1,10 @@
 const authRouter = require('express').Router();
+const authController = require('../controllers/auth_controller');
 
-authRouter.post("/login", (req,res) => {
-     return res.status(200).send("User logged in successfully");
-});
-
-authRouter.post("/register", (req,res) => {
-     return res.status(200).send("User registered successfully");
-});
-
-authRouter.get("/logout", (req,res) => {
-     return res.status(200).send("User logged out successfully");
-});
+authRouter.post("/login", authController.login );
+authRouter.post("/register", authController.login);
+authRouter.get("/forgot-password", authController.forgotPassword);
+authRouter.get("/verify-otp", authController.verifyOtp);
+authRouter.get("/reset-password",authController.resetPassword);
 
 module.exports= authRouter;
