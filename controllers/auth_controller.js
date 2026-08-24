@@ -32,6 +32,12 @@ try {
      }
      return res.status(200).json(user);
 } catch (error) {
+     if (error.message.includes('email_1 dup key')){
+          return res.status(409).json({
+               type:'Auth Error',
+               Message: 'User with that email already exists'
+          });
+     }
      return res.status(500).json({type:error.name, message: error.message});
 }
 }
