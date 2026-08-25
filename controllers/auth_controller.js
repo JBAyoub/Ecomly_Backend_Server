@@ -3,6 +3,7 @@ const { User } = require('../models/user');
 const { Token } = require('../models/token');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const emailSender = require('../helpers/email-sender');
 require('dotenv/config');
 
 
@@ -98,7 +99,35 @@ exports.verifyToken = async function name(req, res) {
 
 }
 exports.forgotPassword = async function (req, res) {
-     return res.status(200).send("User forgot-password successfully");
+     try {
+          const { email } = req.body;
+          const user = await User.findOne({ email });
+          if (!user) return res.status(404).json({ message: "User with that email does not exist" });
+          const OTP = Math.floor(1000 + Math.random() * 56897);
+          user.resetPasswordOtp = OTP;
+          user.resetPasswordExpires = Date.now() + 600000;
+          await user.save();
+          const response = await emailSender.sendMail(
+               email,
+               "Your Password Reset OTP for Ecomly",
+               `Your OTP Code: ${OTP}\nCopy and paste this into the OTP Field`
+          );
+
+          if (response.statusCode === 500) {
+               return res.status(500).json({
+                    message: "Something went wrong with the email sending"
+               });
+          }
+
+          if (response.statusCode === 201) {
+               return res.status(201).json({
+                    message: "Password reset OTP sent successfully"
+               });
+          }
+     } catch (error) {
+          return res.status(500).json({ type: error.name, message: error.message });
+
+     }
 }
 exports.verifyOtp = async function (req, res) {
      return res.status(200).send("User verifyOtp  successfully");
