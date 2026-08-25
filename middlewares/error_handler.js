@@ -9,7 +9,6 @@ async function errorHandler(error, req, res, next) {
                     .status(error.status)
                     .json({ type: error.name, message: error.message })
           }
-
           try {
                const tokenHeader = req.header('Authorization')
                const accessToken = tokenHeader?.split(' ')[1]
