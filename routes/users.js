@@ -2,9 +2,9 @@ const usersRoute = require('express').Router();
 const userController = require('../controllers/user_controller');
 
 
-userRoute.get('/', userController.getUsers);
-userRoute.get('/:id', userController.getUserById);
-userRoute.get('/:id', userController.updateUser);
+usersRoute.get('/', userController.getUsers);
+usersRoute.get('/:id', userController.getUserById);
+usersRoute.get('/:id', userController.updateUser);
 
 
 module.exports = usersRoute;
