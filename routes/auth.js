@@ -9,11 +9,17 @@ const validateUser = [
           .isStrongPassword().withMessage('Password must contain atleast 1 Uppercase, 1 symbol'),
      body('phone').isMobilePhone().withMessage('Please enter a valid phone number')
 ]
+
+const validatePassword = [
+     body('newPassword').isLength({ min: 8 }).withMessage('Password must be atleast 8 characters')
+          .isStrongPassword().withMessage('Password must contain atleast 1 Uppercase, 1 symbol'),
+]
+
 authRouter.post("/login", authController.login);
 authRouter.post("/register", validateUser, authController.register);
-authRouter.get("/forgot-password", authController.forgotPassword);
+authRouter.post("/forgot-password", authController.forgotPassword);
 authRouter.get("/verify-token", authController.verifyToken);
-authRouter.get("/verify-otp", authController.verifyOtp);
-authRouter.get("/reset-password", authController.resetPassword);
+authRouter.post("/verify-otp", authController.verifyOtp);
+authRouter.post("/reset-password", validatePassword, authController.resetPassword);
 
 module.exports = authRouter;
