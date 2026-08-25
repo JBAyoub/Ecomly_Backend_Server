@@ -7,7 +7,6 @@ const emailSender = require('../helpers/email-sender');
 require('dotenv/config');
 
 
-
 exports.login = async function (req, res) {
      try {
           const { email, password } = req.body;
@@ -98,6 +97,7 @@ exports.verifyToken = async function name(req, res) {
      }
 
 }
+
 exports.forgotPassword = async function (req, res) {
      try {
           const { email } = req.body;
@@ -126,11 +126,28 @@ exports.forgotPassword = async function (req, res) {
           }
      } catch (error) {
           return res.status(500).json({ type: error.name, message: error.message });
-
      }
 }
 exports.verifyOtp = async function (req, res) {
-     return res.status(200).send("User verifyOtp  successfully");
+
+     try {
+          const { email, otp } = req.body;
+          const user = await User.findOne({ email });
+          if (!user) return res.status(404).json({ message: "User not found" });
+
+          if (user.resetPasswordOtp !== +otp || Date.now() > user.resetPasswordExpires) {
+               return res.status(401).json({ message: 'Invalid or Expired OTP' });
+          }
+
+          user.resetPasswordOtp = 1;
+          user.resetPasswordExpires = undefined;
+          await user.save();
+          return res.status(200).json({ message: 'OTP Verified Successfully' });
+
+     } catch (error) {
+          return res.status(500).json({ type: error.name, message: error.message });
+
+     }
 }
 exports.resetPassword = async function (req, res) {
      return res.status(200).send("User reset-password successfully");
