@@ -1,4 +1,4 @@
-exports.getUsers = async (req, res) => {
+exports.getUsers = async (_, res) => {
 
 }
 exports.getUserById = async (req, res) => {

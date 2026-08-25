@@ -11,21 +11,21 @@ const app = express();
 const api = env.API_URL;
 
 
-
 app.use(bodyParser.json())
 app.use(morgan("dev"));
 app.use(cors());
 app.options('/', cors());
 app.use(authJwt());
 app.use(errorHandler);
+
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const usersRouter = require('./routes/users');
+
 app.use(`${api}`, authRouter);
 app.use(`${api}/users`, usersRouter);
-
-
 app.use(`${api}/products`, productRouter);
+
 app.listen(env.PORT, env.HOSTNAME, () => {
      console.log(`Server ru at http://${env.HOSTNAME}:${env.PORT}`);
 })
