@@ -45,6 +45,7 @@ async function errorHandler(error, req, res, next) {
                     .json({ type: 'Unauthorized', message: refreshError.message })
           }
      }
+     return res.status(404).json({ type: error.name, message: error.message })
 }
 
 module.exports = errorHandler;
