@@ -1,44 +1,39 @@
-const { User } = require("../models/user");
+const { User } = require('../models/user')
 const jwt = require('jsonwebtoken')
-
 
 exports.getUsers = async (req, res) => {
      try {
           if (!req.auth.isAdmin) {
                return res.status(403).json({
-                    message: "Admin access required"
-               });
+                    message: 'Admin access required'
+               })
           }
-          const users = await User
-               .find()
-               .select("name email id isAdmin");
-          if (!users) return res.status(404).json({ message: 'Users not found' });
-          return res.status(200).json(users);
-
+          const users = await User.find().select('name email id isAdmin')
+          if (!users) return res.status(404).json({ message: 'Users not found' })
+          return res.status(200).json(users)
      } catch (error) {
-          console.error(error);
+          console.error(error)
 
           return res.status(500).json({
                type: error.name,
                message: error.message
-          });
+          })
      }
-};
+}
 exports.getUserById = async (req, res) => {
      try {
-          const user = await User.findById(req.params.id);
-          if (!user) return res.status(404).json({ message: 'User not found' });
-          return res.status(200).json(user);
+          const user = await User.findById(req.params.id).select(
+               '-passwordHash -resetPasswordOTP -resetPasswordExpires -isAdmin'
+          )
+          if (!user) return res.status(404).json({ message: 'User not found' })
+          return res.status(200).json(user)
      } catch (error) {
-          console.error(error);
+          console.error(error)
 
           return res.status(500).json({
                type: error.name,
                message: error.message
-          });
+          })
      }
-
 }
-exports.updateUser = async (req, res) => {
-
-}
+exports.updateUser = async (req, res) => { }
