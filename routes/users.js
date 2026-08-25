@@ -4,7 +4,7 @@ const userController = require('../controllers/user_controller');
 
 usersRoute.get('/admin/all', userController.getUsers);
 usersRoute.get('/:id', userController.getUserById);
-usersRoute.get('/:id', userController.updateUser);
+usersRoute.put('/:id', userController.updateUser);
 
 
 module.exports = usersRoute;
