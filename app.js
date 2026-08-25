@@ -20,10 +20,9 @@ app.use(authJwt());
 app.use(errorHandler);
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
-app.get(`${api}/users`, (req, res) => {
-     return res.json({ name: 'Ayb', age: 69, org: 'handy' });
-});
+const usersRouter = require('./routes/users');
 app.use(`${api}`, authRouter);
+app.use(`${api}/users`, usersRouter);
 
 
 app.use(`${api}/products`, productRouter);
