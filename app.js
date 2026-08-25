@@ -1,8 +1,8 @@
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const express = require("express");
-const morgan = require ("morgan");
-const mongoose= require ("mongoose");
+const morgan = require("morgan");
+const mongoose = require("mongoose");
 
 require('dotenv/config');
 const env = process.env;
@@ -15,11 +15,13 @@ app.use(bodyParser.json())
 app.use(morgan("dev"));
 app.use(cors());
 app.options('/', cors());
+app.use(authJwt);
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
-app.use(`${api}`,authRouter);
+const authJwt = require("./middlewares/jwt");
+app.use(`${api}`, authRouter);
 app.use(`${api}/products`, productRouter);
-app.listen(env.PORT,env.HOSTNAME,() => {
+app.listen(env.PORT, env.HOSTNAME, () => {
      console.log(`Server ru at http://${env.HOSTNAME}:${env.PORT}`);
 })
 

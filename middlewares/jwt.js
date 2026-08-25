@@ -2,11 +2,35 @@ const { expressjwt: expjwt } = require('express-jwt');
 const { token, Token } = require('../models/token');
 
 function authJwt() {
+     const api = process.env.API_URL;
      return expjwt(
           {
                secret: process.env.ACCESS_TOKEN_SECRET,
                algorithms: ['HS256'],
                isRevoked: isRevoked
+          }
+     ).unless(
+          {
+               path: [
+                    `${api}/login`,
+                    `${api}/login/`,
+
+                    `${api}/register`,
+                    `${api}/register/`,
+
+                    `${api}/forgot-password/`,
+                    `${api}/forgot-password`,
+
+                    `${api}/reset-password`,
+                    `${api}/reset-password/`,
+
+                    `${api}/reset-password`,
+                    `${api}/reset-password/`,
+
+                    `${api}/verify-otp`,
+                    `${api}/verify-otp/`,
+
+               ]
           }
      )
 }
