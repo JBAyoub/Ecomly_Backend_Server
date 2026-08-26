@@ -1,25 +1,25 @@
 const express = require('express');
 const adminRouter = express.Router();
 
-const adminController = require('../controllers/admin');
-router.get('/users/count', adminController.getUserCount);
-router.delete('/users/:id', adminController.deleteUser);
+const usersController = require('../controllers/admin/users');
+adminRouter.get('/users/count', usersController.getUserCount);
+adminRouter.delete('/users/:id', usersController.deleteUser);
 
 // CATEGORIES
-router.post('/categories', adminController.addCategory);
-router.put('/categories/:id', adminController.editCategory);
-router.delete('/categories/:id', adminController.deleteCategory);
+adminRouter.post('/categories', adminController.addCategory);
+adminRouter.put('/categories/:id', adminController.editCategory);
+adminRouter.delete('/categories/:id', adminController.deleteCategory);
 
 // PRODUCTS
-router.get('/products/count', adminController.getProductsCount);
-router.post('/products', adminController.addProduct);
-router.put('/products/:id', adminController.editProduct);
-router.delete('/products/:id/images', adminController.deleteProductImages);
-router.delete('/products/:id', adminController.deleteProduct);
+adminRouter.get('/products/count', adminController.getProductsCount);
+adminRouter.post('/products', adminController.addProduct);
+adminRouter.put('/products/:id', adminController.editProduct);
+adminRouter.delete('/products/:id/images', adminController.deleteProductImages);
+adminRouter.delete('/products/:id', adminController.deleteProduct);
 
 // ORDERS
-router.get('/orders', adminController.getOrders);
-router.get('/orders/count', adminController.getOrdersCount);
-router.put('/orders/:id', adminController.changeOrderStatus);
+adminRouter.get('/orders', adminController.getOrders);
+adminRouter.get('/orders/count', adminController.getOrdersCount);
+adminRouter.put('/orders/:id', adminController.changeOrderStatus);
 
 module.exports = adminRouter;
