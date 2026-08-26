@@ -4,7 +4,6 @@ const { OrderItem } = require('../models/order_item');
 const { Token } = require('../models/token');
 const { User } = require('../models/user');
 
-require('dotenv/config');
 
 exports.getUserCount = async (_, res) => {
      try {

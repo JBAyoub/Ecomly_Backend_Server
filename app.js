@@ -27,6 +27,7 @@ app.use(`${api}`, authRouter);
 app.use(`${api}/users`, usersRouter);
 app.use(`${api}/admin`, adminRouter);
 app.use(`${api}/products`, productRouter);
+app.use('/public', express.static(__dirname + '/public'));
 
 app.listen(env.PORT, env.HOSTNAME, () => {
      console.log(`Server ru at http://${env.HOSTNAME}:${env.PORT}`);
