@@ -15,7 +15,7 @@ exports.addCategory = async function (req, res) {
                     message: `${error.message}(${error.field})`,
                });
           }
-          const image = req.files['image'][0];
+          const image = req.files?.image?.[0];
           if (!image) return res.status(404).json({ message: 'No file found!' });
           req.body['image'] = `${req.protocol}://${req.get('host')}/${image.path}`;
           let category = new Category(req.body);
