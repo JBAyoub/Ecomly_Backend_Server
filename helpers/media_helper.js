@@ -1,7 +1,7 @@
 const multer = require('multer');
 
 
-ALLOWED_EXTENSIONS = {
+const ALLOWED_EXTENSIONS = {
      'image/png': 'png',
      'image/jpeg': 'jpeg',
      'image/jpg': 'jpg'

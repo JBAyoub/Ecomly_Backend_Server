@@ -12,7 +12,7 @@ exports.addCategory = async function (req, res) {
                console.error(error);
                return res.status(500).json({
                     type: error.code,
-                    message: `${error.message}(${err.field})`,
+                    message: `${error.message}(${error.field})`,
                });
           }
           const image = req.files['image'][0];
