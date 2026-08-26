@@ -27,5 +27,7 @@ productSchema.pre('save', async () => {
 
 productSchema.index({ name: "text", description: "text" });
 
+productSchema.set('toObject', { virtuals: true });
+productSchema.set('toJSON', { virtuals: true });
 
 exports.Product = model('Product', productSchema);

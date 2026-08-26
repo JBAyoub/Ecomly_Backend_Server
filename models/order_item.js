@@ -13,4 +13,6 @@ const orderItemSchema = schema({
 });
 
 
+orderItemSchema.set('toObject', { virtuals: true });
+orderItemSchema.set('toJSON', { virtuals: true });
 exports.OrderItem = model('OrderItem', orderItemSchema);
