@@ -1,8 +1,8 @@
-const { schema, model, Schema } = require('mongoose');
+const { model, Schema } = require('mongoose');
 
 
 
-const orderItemSchema = schema({
+const orderItemSchema = Schema({
      quantity: { type: Number, default: 1 },
      product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
      productName: { type: String, required: true },

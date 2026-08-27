@@ -1,6 +1,6 @@
-const { schema, model } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const categorySchema = schema({
+const categorySchema = Schema({
      name: {
           type: String,
           requried: true

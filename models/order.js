@@ -1,6 +1,6 @@
-const { schema, model, Schema } = require('mongoose');
+const { model, Schema } = require('mongoose');
 
-const orderSchema = schema({
+const orderSchema = Schema({
      orderItems: [{ type: Schema.Types.ObjectId, ref: 'OrderItem', required: true }],
      shippingAdress: { type: String, required: true },
      city: { type: String, required: true },
