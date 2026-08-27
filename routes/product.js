@@ -1,13 +1,10 @@
 const productRouter = require("express").Router();
-const productsControllers= require('../controllers/product_controller');
-productRouter.get("/count", (req,res) => {
-     productsControllers.productsCountController(req,res);
-});
-productRouter.get("/:id", (req,res) => {
-     productsControllers.productDetailController(req,res);
-})
-productRouter.delete("/:id", (req,res) => {
-     return res.status(200).send(`the user has requested to delte the product with the id  ${req.params.id}`);
-})
+const productsController = require('../controllers/product_controller');
+const reviewsController = require('../controllers/reviews_controller');
+productRouter.get('/', productsController.getProducts);
+productRouter.get("/search", productsController.searchProducts);
+productRouter.get("/:id", productsController.getProductById);
+productRouter.post('/:id/reviews', reviewsController.leaveReview);
+productRouter.get('/:id/reviews', reviewsController.getProductReviews);
 
-module.exports=productRouter;
+module.exports = productRouter;

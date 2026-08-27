@@ -1,7 +1,11 @@
-exports.productsCountController = (req,res) => {
-     const count = 233;
-     return res.status(203).send(`the product count is ${count}`)
+exports.getProducts = async function (req, res) {
+
 }
-exports.productDetailController = (req,res) => {
-     return res.status(200).send(`the user has requested the product with the id  ${req.params.id}`);
+
+exports.searchProducts = async function (req, res) {
+
+}
+
+exports.getProductById = async function (req, res) {
+
 }

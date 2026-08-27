@@ -22,11 +22,13 @@ const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const usersRouter = require('./routes/users');
 const adminRouter = require("./routes/admin");
+const categoriesController = require('./routes/categories');
 
 app.use(`${api}`, authRouter);
 app.use(`${api}/users`, usersRouter);
 app.use(`${api}/admin`, adminRouter);
 app.use(`${api}/products`, productRouter);
+app.use(`${api}/categories`, categoriesController);
 app.use('/public', express.static(__dirname + '/public'));
 
 app.listen(env.PORT, env.HOSTNAME, () => {
