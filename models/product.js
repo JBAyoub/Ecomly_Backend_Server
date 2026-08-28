@@ -8,7 +8,6 @@ productSchema = Schema({
      colours: [{ type: String }],
      image: { type: String, required: true },
      images: [{ type: String }],
-     reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
      numberOfReviews: { type: Number, default: 0 },
      sizes: [{ type: String }],
      category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },

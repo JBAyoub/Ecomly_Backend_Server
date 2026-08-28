@@ -4,7 +4,8 @@ const reviewSchema = Schema({
      product: {
           type: Schema.Types.ObjectId,
           ref: "Product",
-          required: true
+          required: true,
+          index: true
      },
 
      user: {
@@ -35,7 +36,10 @@ const reviewSchema = Schema({
           default: Date.now
      }
 });
-
+reviewSchema.index(
+     { product: 1, user: 1 },
+     { unique: true }
+);
 reviewSchema.set('toJSON', { virtuals: true });
 reviewSchema.set('toObject', { virtuals: true });
 
