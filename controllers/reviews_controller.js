@@ -54,7 +54,6 @@ exports.leaveReview = async function (req, res) {
 }
 
 exports.getProductReviews = async function (req, res) {
-
      try {
           const page = Math.max(
                parseInt(req.query.page, 10) || 1,
@@ -73,6 +72,8 @@ exports.getProductReviews = async function (req, res) {
                .sort({ date: -1 })
                .skip(skip)
                .limit(pageSize);
+          if (!reviews) return res.status(404).json({ message: 'Could not find reviews' });
+          return res.json(reviews);
      } catch (error) {
           console.error(error);
           return res.status(500).json({ type: error.name, message: error.message });
