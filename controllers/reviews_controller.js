@@ -64,7 +64,6 @@ exports.getProductReviews = async function (req, res) {
                100
           );
           const skip = (page - 1) * pageSize;
-
           const reviews = await Review.find({
                product: req.params.productId
           })
@@ -72,10 +71,24 @@ exports.getProductReviews = async function (req, res) {
                .sort({ date: -1 })
                .skip(skip)
                .limit(pageSize);
-          if (!reviews) return res.status(404).json({ message: 'Could not find reviews' });
-          return res.json(reviews);
+          const totalReviews = await Review.countDocuments({
+               product: req.params.productId
+          });
+
+          return res.json({
+               reviews,
+               pagination: {
+                    page,
+                    pageSize,
+                    total: totalReviews,
+                    totalPages: Math.ceil(totalReviews / pageSize)
+               }
+          });
      } catch (error) {
-          console.error(error);
-          return res.status(500).json({ type: error.name, message: error.message });
+          console.error("getProductReviews:", error);
+          return res.status(500).json({
+               type: "InternalServerError",
+               message: "Could not fetch reviews"
+          });
      }
-}
+};
